@@ -21,6 +21,9 @@ class VimLine(list):
 
     def delete_once(self):
         del self[self.pos]
+        length = len(self)
+        if self.pos == length:
+            self.pos = length - 1
 
     def delete(self):
         del self.buf[self.linenr - 1]
