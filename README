@@ -1,0 +1,9 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=1050
+
+I usually edit Python code that has a lot of whitespace indenting.
+The backspace key works nicely, and I'm able to delete indents,
+but I'm unable to do so with the <Del> key.
+I've searched the web, searched the scripts and tips, asked on the vim mailing list,
+asked on IRC and read a lot of documentation.
+In the end, I found it easier to write a Python script that gave me the desired behaviour.
+So, here it is. It works for me.
