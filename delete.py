@@ -12,6 +12,7 @@ class VimLine(list):
         self.sts = softtabstop
         self.linenr, self.pos = vim.current.window.cursor
         self.buf = vim.current.buffer
+        self.deleted = False
 
     def on_space_indent(self):
         return self[self.pos:self.pos + self.sts].count(" ") == self.sts
@@ -27,15 +28,17 @@ class VimLine(list):
 
     def delete(self):
         del self.buf[self.linenr - 1]
+        self.deleted = True
+        self.pos = 0
 
     def __del__(self):
-        if self:
+        if not self.deleted:
             vim.current.line = "".join(self)
-            vim.current.window.cursor = (self.linenr, self.pos)
+        vim.current.window.cursor = (self.linenr, self.pos)
 
 def main():
     line = VimLine()
-    if len(line) >= line.sts:
+    if line:
         if line.on_space_indent():
             line.delete_spaces()
         else:
